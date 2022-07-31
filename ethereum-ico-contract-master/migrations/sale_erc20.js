@@ -30,25 +30,25 @@ contract('Sale', function(accounts) {
     return Sale.deployed().then(function(instance) {
       return instance.ETHWallet.call()
     }).then(function(address) {
-      assert.equal(address, "0x93F0E039Bd798e4C8428D9940A45Ce3860D7BAC7", "Transfer ETH to confirmed");
+      assert.equal(address, "0x93F0E039Bd798e4C8428D9940A45Ce3860D7BAC7", "Transfer CRO to confirmed");
     });
   });
 
 
-  it("should contribute some ETH", function() {
+  it("should contribute some CRO", function() {
     return Sale.deployed().then(function(instance) {
       return instance.contribute({from: account_one, value: 20000000000})
     }).then(function(tx) {
-      assert.equal(tx.logs[0].event, "Contribution", "Transfer ETH to confirmed");
+      assert.equal(tx.logs[0].event, "Contribution", "Transfer CRO to confirmed");
     })
   });
 
 
-  it("should send some ETH without contribute function", function() {
+  it("should send some CRO without contribute function", function() {
       return Sale.deployed().then(function(instance) {
           return instance.sendTransaction({value: 100000000000, gasLimit: 100000, from: account_three});
       }).then(function(tx) {
-          assert.equal(tx.logs[0].event, "Contribution", "Transfer ETH to confirmed");
+          assert.equal(tx.logs[0].event, "Contribution", "Transfer CRO to confirmed");
       })
   });
 
@@ -88,7 +88,7 @@ contract('Sale', function(accounts) {
     })
   });
 
-  it("should change TOKEN/ETH rate", function() {
+  it("should change TOKEN/CRO rate", function() {
     return Sale.deployed().then(function(instance) {
       return instance.updateRate(750, {from: account_one})
     }).then(function() {
