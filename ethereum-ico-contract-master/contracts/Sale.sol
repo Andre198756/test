@@ -2,17 +2,14 @@ pragma solidity ^0.4.21;
 
 /*
 
-  BASIC ERC20 Sale Contract
+  TST CRC20 Sale Contract
 
   Create this Sale contract first!
 
      Sale(address ethwallet)   // this will send the received ETH funds to this address
 
 
-  @author Hunter Long
-  @repo https://github.com/hunterlong/ethereum-ico-contract
-
-*/
+  
 
 
 contract ERC20 {
@@ -50,12 +47,12 @@ contract Sale {
 
     function Sale(address _wallet) {
         startBlock = block.number;
-        maxMintable = 4000000000000000000000000; // 3 million max sellable (18 decimals)
+        maxMintable = 5000000000000000000000000; // 5 million max sellable (18 decimals)
         ETHWallet = _wallet;
         isFunding = true;
         creator = msg.sender;
         createHeldCoins();
-        exchangeRate = 600;
+        exchangeRate = 1;
     }
 
     // setup function to be ran only 1 time
@@ -87,7 +84,7 @@ contract Sale {
     }
 
     // CONTRIBUTE FUNCTION
-    // converts ETH to TOKEN and sends new TOKEN to the sender
+    // converts CRO to TOKEN and sends new TOKEN to the sender
     function contribute() external payable {
         require(msg.value>0);
         require(isFunding);
@@ -101,7 +98,7 @@ contract Sale {
         Contribution(msg.sender, amount);
     }
 
-    // update the ETH/COIN rate
+    // update the CRO/COIN rate
     function updateRate(uint256 rate) external {
         require(msg.sender==creator);
         require(isFunding);
@@ -123,10 +120,10 @@ contract Sale {
     // internal function that allocates a specific amount of TOKENS at a specific block number.
     // only ran 1 time on initialization
     function createHeldCoins() internal {
-        // TOTAL SUPPLY = 5,000,000
+        // TOTAL SUPPLY = 50,000,000
         createHoldToken(msg.sender, 1000);
-        createHoldToken(0x4f70Dc5Da5aCf5e71905c3a8473a6D8a7E7Ba4c5, 100000000000000000000000);
-        createHoldToken(0x393c82c7Ae55B48775f4eCcd2523450d291f2418, 100000000000000000000000);
+        createHoldToken(0x6d2be2b4a52511417e90149a4fe30de8e3015e21, 2000000000000000000000000);
+        createHoldToken(0x10f6fdda10d6c65286b08b12c8225b926f33e393, 2500000000000000000000000);
     }
 
     // public function to get the amount of tokens held for an address
