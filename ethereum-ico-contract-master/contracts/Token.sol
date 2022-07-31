@@ -3,19 +3,18 @@ pragma solidity ^0.4.21;
 
 /*
 
-BASIC ERC20 Crowdsale ICO ERC20 Token
+TEST CRC20 Crowdsale ICO ERC20 Token
 
 Create this Token contract AFTER you already have the Sale contract created.
 
    Token(address sale_address)   // creates token and links the Sale contract
 
-@author Hunter Long
-@repo https://github.com/hunterlong/ethereum-ico-contract
+
 
 */
 
 
-contract BasicToken {
+contract TESTToken {
     uint256 public totalSupply;
     bool public allowTransfer;
 
@@ -29,7 +28,7 @@ contract BasicToken {
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 }
 
-contract StandardToken is BasicToken {
+contract StandardToken is TESTToken {
 
     function transfer(address _to, uint256 _value) returns (bool success) {
         require(allowTransfer);
@@ -72,10 +71,10 @@ contract StandardToken is BasicToken {
 
 contract Token is StandardToken {
 
-    string public name = "BASIC ERC20 SALE";
+    string public name = "TEST CRC20 SALE";
     uint8 public decimals = 18;
-    string public symbol = "BASIC";
-    string public version = 'BASIC 0.1';
+    string public symbol = "TEST";
+    string public version = 'TEST';
     address public mintableAddress;
 
     function Token(address sale_address) {
@@ -89,11 +88,11 @@ contract Token is StandardToken {
         createTokens();
     }
 
-    // creates all tokens 5 million
+    // creates all tokens 50 million
     // this address will hold all tokens
     // all community contrubutions coins will be taken from this address
     function createTokens() internal {
-        uint256 total = 5000000000000000000000000;
+        uint256 total = 50000000000000000000000000;
         balances[this] = total;
         totalSupply = total;
     }
